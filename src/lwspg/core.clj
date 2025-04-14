@@ -1,4 +1,4 @@
-(ns lwspg.core
+(ns qndspg.core
   (:gen-class)
   (:require [commonmark-hiccup.core :refer [markdown->html]]
             [clojure.java.io :as io]

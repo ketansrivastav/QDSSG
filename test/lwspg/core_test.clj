@@ -1,6 +1,6 @@
-(ns lwspg.core-test
+(ns qndspg.core-test
   (:require [clojure.test :refer :all]
-            [lwspg.core :refer :all]))
+            [qndspg.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

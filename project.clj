@@ -1,4 +1,4 @@
-(defproject lwspg "0.1.0-SNAPSHOT"
+(defproject qndspg "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
@@ -7,7 +7,7 @@
                  [commonmark-hiccup "0.2.0"]
                  [org.clojure/tools.cli "1.1.230"]]
 
-  :main ^:skip-aot lwspg.core
+  :main ^:skip-aot qndspg.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
