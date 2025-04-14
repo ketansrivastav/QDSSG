@@ -1,4 +1,4 @@
-# Quick And Dirty Static Page Generator
+# Quick And Dirty Static Site Generator
 
 Least fancy way of generating HTML files from MD source
 
