@@ -1,4 +1,4 @@
-(ns qndspg.core
+(ns qdssg.core
   (:gen-class)
   (:require [commonmark-hiccup.core :refer [markdown->html]]
             [clojure.java.io :as io]
@@ -12,7 +12,7 @@
       (str path-str "/"))))
 
 (defn generate-output-content
-  "Pure function that takes in HMTL and MD content and outputes HTML with the MD content inserted into the provided HTML"
+  "Pure function that takes in HTML and MD content and outputes HTML with the MD content inserted into the provided HTML"
   [base-html md]
   (let [md-seq (string/split md #"\n|\r\n|\r")
         tokens (reduce (fn [{:keys [content vars :are-vars-read?] :as acc}  ele]
