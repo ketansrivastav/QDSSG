@@ -24,8 +24,11 @@ nil
 ````
 where,
 source-dir : contains your source .md files
+
 dest-dir : where you want your HTML files outputed, for example "./public/"
+
 base-html Path to the HTML templete which would be used to create static pages.
+
 
 # Base HTML
 
