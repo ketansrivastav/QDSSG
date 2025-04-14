@@ -42,12 +42,16 @@
 
 ;; Check if file exists
 (defn file-exists? [path]
-  (.exists (io/file path)))
+  (if path
+    (.exists (io/file path))
+    false))
 
 ;; Check if path exists and is a directory
 (defn directory? [path]
-  (let [file (io/file path)]
-    (and (.exists file) (.isDirectory file))))
+  (if path
+    (let [file (io/file path)]
+      (and (.exists file) (.isDirectory file)))
+    false))
 
 (defn generate-output! [arg-source arg-dest arg-base]
   (doseq [source  (->>  (io/file (normalize-path arg-source))
@@ -59,9 +63,9 @@
           source-filename (.getName source)
           destination  (normalize-path arg-dest)
           destination-file (string/replace (str destination source-filename) #".md" ".html")]
-      (print "writing" destination-file " using " source-path)
+      (println "writing" destination-file " using " source-path)
       (spit-creating-dirs destination-file (generate-output-content (slurp base-file) (slurp source-path)))
-      (print "... done"))))
+      (println "... done"))))
 
 (defn validate-and-run [validataton-functions run-function]
   (let [validations (for [[f error] (partition 2 validataton-functions)]
@@ -74,7 +78,6 @@
       )))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
   (let [{:keys [options]} (parse-opts args [["-s" "--source DIR" "Source Directory"]
                                             ["-d" "--dest DIR" "Destination Directory"]
@@ -88,13 +91,11 @@
         output-without-nil (remove nil? output)]
     (if (coll? output-without-nil)
       (doseq [err output-without-nil]
-      (print "Error: " err "\n")))))
+        (println "Error: " err "\n")))))
 
 (comment
 
   (conj [2 3]  {:a ")e"})
-  (-main "-s"  "/Users/ketansrivastav/code/lwspg/resources/content/" "-d" "/Users/ketansrivastav/code/lwspg/resources/public/"  "--base" "/Users/ketansrivastav/code/lwspg/resources/template/base.html")
-  (keyword (string/trim "  ehhl  "))
-  (string/split "---" #":")
+  (-main "-s"  "/Users/ketansrivastav/code/content/" "-d" "/Users/ketansrivastav/code/public/"  "--base" "/Users/ketansrivastav/code/template/base.html")
   (markdown->html "Hello there *what?*")
   nil)

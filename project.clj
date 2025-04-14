@@ -8,7 +8,6 @@
                  [org.clojure/tools.cli "1.1.230"]]
 
   :main ^:skip-aot lwspg.core
-  :aot :all
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
