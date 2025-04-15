@@ -1,4 +1,4 @@
-# Quick And Dirty Static Page Generator
+# Quick And Dirty Static Site Generator
 
 Least fancy way of generating HTML files from MD source
 
@@ -10,7 +10,7 @@ Least fancy way of generating HTML files from MD source
 from command line:
 
 ````
-java -jar path/to/uberjar source-dir dest-dir base-html
+java -jar path/to/uberjar --source source-dir --dest dest-dir --base base-html
 
 ````
 
