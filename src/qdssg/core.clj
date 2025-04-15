@@ -17,7 +17,7 @@
   (let [md-seq (string/split md #"\n|\r\n|\r")
         tokens (reduce (fn [{:keys [content vars :are-vars-read?] :as acc}  ele]
                          (if are-vars-read?
-                           (assoc acc :content (str content (markdown->html ele)))
+                           (update acc :content #(str %  "\n" ele))
                            (if (= ele "---")
                              (assoc acc :are-vars-read? true)
                              (let [[key val] (string/split ele #":" 2)]
@@ -27,8 +27,10 @@
                         :content ""} (rest md-seq))
         base-with-vars (reduce (fn [acc [key val]]
                                  (string/replace acc (re-pattern (str "\\{\\{" key "\\}\\}")) val)) base-html (:vars tokens))
-        base-with-vars-and-content (string/replace base-with-vars (re-pattern (str "\\{\\{content\\}\\}"))  (:content tokens))]
-    base-with-vars-and-content))
+        base-with-vars-and-content (string/replace base-with-vars (re-pattern (str "\\{\\{content\\}\\}")) (markdown->html (str  (:content tokens) "\n")))]
+    base-with-vars-and-content
+    
+    ))
 
 (defn spit-creating-dirs
   "Like spit, but creates directories if they don't exist."
@@ -96,6 +98,12 @@
 (comment
 
   (conj [2 3]  {:a ")e"})
-  (-main "-s"  "/Users/ketansrivastav/code/content/" "-d" "/Users/ketansrivastav/code/public/"  "--base" "/Users/ketansrivastav/code/template/base.html")
-  (markdown->html "Hello there *what?*")
+  (-main "--source"  "/Users/ketansrivastav/code/functional-sutras/content" "--dest" "/Users/ketansrivastav/code/functional-sutras/public"  "--base" "/Users/ketansrivastav/code/functional-sutras/template/temp.html")
+
+  (markdown->html "Hello there *what?*
+                ```javascript
+                 const a =1;
+                 ```` 
+                  
+                  ")
   nil)
